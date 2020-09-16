@@ -1,0 +1,13 @@
+<%- include("partials/header"); %>
+<h1>장르별 페이지~</h1>
+
+<% movies.forEach(function(movie) { %>
+    <div class="movie">
+      <h2><%= movie.title %></h2>
+      <h3><%= movie.genre %></h5>
+      <p><%= (movie.content) %></p>
+    </div>
+    <hr />
+    <% }) %> 
+
+<%- include("partials/footer"); %>

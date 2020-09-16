@@ -1,0 +1,12 @@
+<%- include("partials/header"); %>
+<h1>연도별 페이지~</h1>
+
+<% movies.forEach(function(movie) { %>
+<div class="movie">
+  <h2><%= movie.title %></h2>
+  <h3><%= movie.year %></h3>
+  <p><%= (movie.content) %></p>
+  <hr />
+</div>
+
+<% }) %> <%- include("partials/footer"); %>
