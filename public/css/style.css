@@ -23,15 +23,15 @@ header {
 }
 
 .navi {
-  position: absolute;
+  position: relative;
   background-color: black;
-  width: 99.15%;
   height: 110px;
 }
 
 .navi ul {
   list-style: none;
   height: 70px;
+  margin-top: 0px;
   padding-top: 15px;
   padding-bottom: 5px;
   display: flex;
@@ -67,14 +67,12 @@ header {
   width: 80%;
   height: 1890px;
   background: rgba(216, 216, 216, 0.432);
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
+  padding: 10px;
 }
 .img1 {
-  width: 400px;
+  width: 380px;
   height: 570px;
-  margin-top: 350px;
+  margin-right: 10px;
 }
 .img1:hover,
 .img1:active {
@@ -88,8 +86,6 @@ header {
   width: 20%;
   height: 1890px;
   background: rgba(46, 45, 45, 0.158);
-  display: flex;
-  flex-wrap: nowrap;
 }
 
 footer {
