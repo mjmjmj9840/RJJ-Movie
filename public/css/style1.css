@@ -1,0 +1,157 @@
+@charset "utf-8";
+body {
+  margin: 0;
+}
+
+header {
+  background-color: black;
+  padding: 3% 0 1% 0;
+}
+
+header a,
+header a :visited {
+  text-decoration: none;
+  color: white;
+  padding-left: 17%;
+  color: white;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 320%;
+}
+
+.navi {
+  background-color: black;
+  padding: 0.1%;
+}
+.search {
+  padding-left: 5%;
+  padding-top: 0.3%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+input {
+  width: 60%;
+  padding: 2%;
+  border-radius: 15px;
+  outline: none;
+}
+button {
+  width: 70px;
+  padding: 2%;
+  border-radius: 15px;
+  outline: none;
+  background-color: white;
+}
+
+.navi ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.navi ul li {
+  display: inline;
+  float: left;
+  font-size: 110%;
+  font-weight: bold;
+}
+.navi a,
+.navi a:visited {
+  padding: 7px 5px 3px 5px;
+  text-align: center;
+  display: block;
+  color: #fff;
+  width: 120px;
+  text-decoration: none;
+}
+
+.navi a:hover,
+.navi a:active {
+  color: black;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.content {
+  /* 본문 */
+  width: 100%;
+  float: left;
+}
+.text {
+  margin-top: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.text a {
+  border-bottom: 3px double;
+}
+.more a,
+.more a :visited {
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.more {
+  text-align: right;
+  border-bottom: 2px solid black;
+  padding-top: 1%;
+  padding-bottom: 3%;
+  padding-right: 2%;
+}
+.img,
+.text {
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  justify-content: space-around;
+}
+.img1 {
+  width: 70%;
+}
+.img1:hover,
+.img1:active,
+.img2:hover,
+.img2:active {
+  border: 7px groove black;
+  border-radius: 8px;
+}
+
+.img2 {
+  width: 100%;
+}
+
+table {
+  margin: 5%;
+  padding-bottom: 5%;
+}
+.row {
+  border-bottom: 2px solid black;
+}
+.a {
+  font-size: x-large;
+  font-weight: bold;
+  font-style: italic;
+}
+.b,
+.c {
+  font-size: medium;
+  padding-top: 1%;
+}
+.in {
+  padding: 5%;
+}
+/*
+.right-side { 
+    float:right;
+    width:20%;
+    height:1890px;
+    background: rgba(46, 45, 45, 0.158);
+}*/
+
+footer {
+  clear: both;
+  padding: 1%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: x-small;
+}
