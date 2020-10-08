@@ -1,4 +1,25 @@
 <%- include("partials/header"); %>
-<h1>영화 찾기 페이지~</h1>
+<section class="content">
+  <p class="text"><a>SEARCH RESULTS FOR <%=search%></a></p>
+
+  <% if(no_data == 1) { %>
+  <div class="no_result">
+    <p class="text">"<%=search%>"에 대한 검색결과가 없습니다.</p>
+  </div>
+  <% } else { movies.forEach(function(movie) { %>
+  <table class="row">
+    <td width="20%">
+      <a href="#"
+        ><img class="this_week_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+      /></a>
+    </td>
+    <td class="this_week">
+      <div class="this_week_title"><%=movie.title%></div>
+      <div class="this_week_content"><%=movie.en_title%>, <%=movie.year%></div>
+      <div class="this_week_content"><%=movie.content%></div>
+    </td>
+  </table>
+  <% }) } %>
+</section>
 
 <%- include("partials/footer"); %>

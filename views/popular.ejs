@@ -1,0 +1,15 @@
+<%- include("partials/header"); %>
+
+<section class="content">
+  <p class="text"><a>POPULAR</a></p>
+
+  <div class="popular">
+    <% for (var i = 0; i < 15; i++) { %>
+    <a href="#"
+      ><img class="popular_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+    /></a>
+    <% } %>
+  </div>
+</section>
+
+<%- include("partials/footer"); %>

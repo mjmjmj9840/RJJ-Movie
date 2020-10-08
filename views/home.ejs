@@ -3,11 +3,13 @@
 <section class="content">
   <p class="text"><a>1 YEAR AGO TODAY</a></p>
 
-  <p class="img">
-    <a href="#"><img class="img1" src="movie_image1.jpg" alt="movie_image1" /></a>
-    <a href="#"><img class="img1" src="movie_image2.jpg" alt="movie_image2" /></a>
-    <a href="#"><img class="img1" src="movie_image3.jpg" alt="movie_image3" /></a>
-  </p>
+  <div class="home_img">
+    <% movies.forEach(function(movie) { %>
+    <a href="#"
+      ><img class="year_ago_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+    /></a>
+    <% }) %>
+  </div>
 
   <p class="more">
     <a href="#">MORE</a>
@@ -17,56 +19,20 @@
     <a>POPULAR MOVIES THIS WEEK</a>
   </p>
 
+  <% movies.forEach(function(movie) { %>
   <table class="row">
     <td width="20%">
-      <a href="#"><img class="img2" src="movie_image4.jpg" alt="movie_image4" align="left" /></a>
+      <a href="#"
+        ><img class="this_week_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+      /></a>
     </td>
-    <td class="in">
-      <div class="a">뮬란</div>
-      <div class="b">Mulan, 2020</div>
-      <div class="c">
-        무예에 남다른 재능을 지닌 '뮬란'은 좋은 집안과 인연을 맺어 가문을 빛내길 바라는 부모님의
-        뜻에 따라 본연의 모습을 억누르고 성장한다. 어느 날, 북쪽 오랑캐들이 침입하자 황제는 징집령을
-        내리고 '뮬란'은 아픈 아버지를 대신해 가족들 몰래 전장에 나가기로 결심한다. 여자라는 게
-        발각되면 목숨을 잃을 수도 있는 상황 속에서 '뮬란'은 타고난 용기와 지혜로 역경을 이겨내며
-        전사로 성장한다. 마침내 잔인 무도한 적장 '보리 칸'과 마녀 '시아니앙'을 마주하게 된 '뮬란'.
-        그녀는 위험에 빠진 동료와 가족을 구하고 진정한 전사로 거듭날 수 있을 것인가
-      </div>
+    <td class="this_week">
+      <div class="this_week_title"><%=movie.title%></div>
+      <div class="this_week_content"><%=movie.en_title%>, <%=movie.year%></div>
+      <div class="this_week_content"><%=movie.content%></div>
     </td>
   </table>
-  <table class="row">
-    <td width="20%">
-      <a href="#"><img class="img2" src="movie_image1.jpg" alt="movie_image1" /></a>
-    </td>
-    <td class="in">
-      <div class="a">오! 문희</div>
-      <div class="b">Oh! My Gran, 2020</div>
-      <div class="c">
-        평화로운 금산 마을. 불같은 성격에 가족 사랑도 뜨거운 '두원'(이희준)에게 하나뿐인 딸 '보미'가
-        뺑소니 사고를 당했다는 청천벽력 같은 소식이 전해진다. 게다가 현장의 유일한 목격자는 기억이
-        깜빡깜빡하는 엄니 '문희'(나문희)와 왈왈 짖기만 하는 개 '앵자'뿐. 의식 불명 상태로 병원에
-        있는 '보미'. 경찰수사에 진전이 없자 '두원'의 속은 점점 타들어간다. 하지만 예기치 못한 순간
-        엄니 '문희'가 뜻밖의 단서를 기억해내고 '두원'은 엄니와 함께 논두렁을 가르며 직접 뺑소니범을
-        찾아 나서기 시작하는데! 아무도 못 잡으면, 우리가 직접 잡는다!
-      </div>
-    </td>
-  </table>
-  <table class="row">
-    <td width="20%">
-      <a href="#"><img class="img2" src="movie_image3.jpg" alt="movie_image1" /></a>
-    </td>
-    <td class="in">
-      <div class="a">오케이 마담</div>
-      <div class="b">OK! MADAM, 2019</div>
-      <div class="c">
-        극강의 쫄깃함으로 빠른 완판을 기록하는 꽈배기 맛집 사장 '미영'은 컴퓨터 수리 전문가 '석환'의
-        남다른 외조로 하와이 여행에 당첨되고, 난생처음 해외 여행을 떠나게 된다. 하지만 비밀 요원을
-        쫓는 테러리스트들도 같은 비행기에 오르고 꿈만 같았던 여행은 아수라장이 된다. 난데없는 비행기
-        납치 사건의 유일한 해결사가 되어버린 부부. 평범했던 과거는 접어두고, 숨겨왔던 내공을 펼치며
-        인질이 된 승객을 구하기 시작한다! 휴가 끝 ;; 작전 시작 ^^ 구하자 비행기! 가자 하와이로!
-      </div>
-    </td>
-  </table>
+  <% }) %>
 </section>
 
 <%- include("partials/footer"); %>

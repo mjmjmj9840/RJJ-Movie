@@ -1,12 +1,28 @@
 <%- include("partials/header"); %>
-<h1>연도별 페이지~</h1>
 
-<% movies.forEach(function(movie) { %>
-<div class="movie">
-  <h2><%= movie.title %></h2>
-  <h3><%= movie.year %></h3>
-  <p><%= (movie.content) %></p>
-  <hr />
-</div>
+<section class="content">
+  <p class="text"><a>YEAR</a></p>
+  <div class="year_select_label">
+    <select class="year_select">
+      <option>2000</option>
+      <option>2001</option>
+      <option>2002</option>
+      <option>2003</option>
+      <option>2004</option>
+      <option>2005</option>
+      <option>2006</option>
+      <option>2007</option>
+      <option>2008</option>
+      <option>2009</option>
+      <option>2010</option>
+    </select>
+  </div>
 
-<% }) %> <%- include("partials/footer"); %>
+  <div class="year">
+    <% movies.forEach(function(movie) { %>
+    <a href="#"><img class="year_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>" /></a>
+    <% }) %>
+  </div>
+</section>
+
+<%- include("partials/footer"); %>
