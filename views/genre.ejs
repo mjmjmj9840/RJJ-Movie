@@ -3,21 +3,15 @@
 <section class="content">
   <div class="genre_select_label">
     <label class="genre_reg">GENRE</label>
-    <select class="genre_select">
-      <option>Drama</option>
-      <option>Fantasy</option>
-      <option>Horror</option>
-      <option>Romance</option>
-      <option>Adventure</option>
-      <option>Thriller</option>
-      <option>Documentary</option>
-      <option>Comedy</option>
-      <option>Family</option>
-      <option>Animation</option>
-      <option>Crime</option>
-      <option>Action</option>
-      <option>Erotic</option>
-    </select>
+    <form action="/genre" method="post">
+      <select class="genre_select" name="genre" onchange="this.form.submit()">
+        <% for(let i = 0; i < genre.length; i++) { if(i.toString() === genreID) { %>
+        <option value="<%= i %>" selected><%= genre[i]%></option>
+        <% } else { %>
+        <option value="<%= i %>"><%= genre[i]%></option>
+        <% } } %>
+      </select>
+    </form>
   </div>
 
   <div class="genre">

@@ -69,11 +69,39 @@ app.post('/year', function (req, res) {
 });
 
 // Genre Route
-app.get('/genre', function (req, res) {
-  Movie.find({}, function (err, movies) {
-    if (err) return console.error(err);
-    res.render('genre', { movies: movies });
+app.get('/genre/:genreID', function (req, res) {
+  const requestedID = req.params.genreID;
+
+  const genre = [
+    '드라마',
+    '판타지',
+    '공포',
+    '로맨스',
+    '모험',
+    '스릴러',
+    '다큐멘터리',
+    '코미디',
+    '가족',
+    '애니메이션',
+    '범죄',
+    '액션',
+    '에로',
+  ];
+
+  Movie.find({ genre: genre[requestedID] }, function (err, movies) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      res.render('genre', { genre: genre, genreID: requestedID, movies: movies });
+    }
   });
+});
+
+app.post('/genre', function (req, res) {
+  const genreID = req.body.genre;
+
+  res.redirect('/genre/' + genreID);
 });
 
 // Search Route
