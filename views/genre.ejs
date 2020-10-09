@@ -1,15 +1,32 @@
 <%- include("partials/header"); %>
 
-<h1>장르별 페이지~</h1>
+<section class="content">
+  <div class="genre_select_label">
+    <label class="genre_reg">GENRE</label>
+    <select class="genre_select">
+      <option>Drama</option>
+      <option>Fantasy</option>
+      <option>Horror</option>
+      <option>Romance</option>
+      <option>Adventure</option>
+      <option>Thriller</option>
+      <option>Documentary</option>
+      <option>Comedy</option>
+      <option>Family</option>
+      <option>Animation</option>
+      <option>Crime</option>
+      <option>Action</option>
+      <option>Erotic</option>
+    </select>
+  </div>
 
-<% movies.forEach(function(movie) { %>
-    <div class="movie">
-      <h2><%= movie.title %></h2>
-      <h3><%= movie.genre %></h5>
-      <p><%= (movie.content) %></p>
-    </div>
-    <hr />
-    <% }) %> 
-
+  <div class="genre">
+    <% movies.forEach(function(movie) { %>
+    <a href="/detail/<%= movie._id %>"
+      ><img class="genre_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+    /></a>
+    <% }) %>
+  </div>
+</section>
 
 <%- include("partials/footer"); %>

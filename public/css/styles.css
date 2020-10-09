@@ -35,7 +35,7 @@ header a :visited {
 }
 
 input {
-  width: 60%;
+  width: 55%;
   padding: 2%;
   border-radius: 15px;
   outline: none;
@@ -62,7 +62,6 @@ button {
   float: left;
   font-size: 110%;
   font-weight: lighter;
-  font-family: 'Jua', sans-serif;
 }
 
 .navi a,
@@ -123,7 +122,7 @@ button {
 }
 
 .year_ago_img {
-  width: 350px;
+  width: 270px;
 }
 
 .this_week_img {
@@ -156,6 +155,17 @@ table {
 
 /* popular */
 
+.pop {
+  font-size: 20px;
+  width: 115px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 10%;
+  margin-top: 3%;
+  border-bottom: 3px double;
+  text-align: center;
+}
+
 .popular {
   margin: 5%;
 }
@@ -167,6 +177,19 @@ table {
 
 /* yaer */
 .year_select_label {
+  margin-left: 10%;
+  margin-top: 3%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.year_reg {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-bottom: 3px double;
+  margin-right: 2%;
+  width: 67px;
   text-align: center;
 }
 
@@ -186,10 +209,65 @@ table {
   margin: 2%;
 }
 
+/* genre */
+.genre_select_label {
+  margin-left: 10%;
+  margin-top: 3%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.genre_reg {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-bottom: 3px double;
+  margin-right: 2%;
+  width: 80px;
+  text-align: center;
+}
+
+.genre_select {
+  border-radius: 5px;
+  padding: 0.2%;
+  outline: none;
+  width: 115px;
+}
+
+.genre {
+  margin: 5%;
+}
+
+.genre_img {
+  width: 15%;
+  margin: 2%;
+}
+
 /* search */
 .no_result {
   margin: 5%;
   text-align: center;
+}
+
+/* detail */
+
+.detail_img {
+  width: 100%;
+}
+
+.detail {
+  padding: 0 5%;
+}
+
+.detail_title {
+  font-size: x-large;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.detail_content {
+  font-size: medium;
+  padding-top: 1%;
 }
 
 /* image hover */
@@ -200,7 +278,9 @@ table {
 .popular_img:hover,
 .popular_img:active,
 .year_img:hover,
-.year_img:active {
+.year_img:active,
+.genre_img:hover,
+.genre_img:active {
   border: 7px groove black;
   border-radius: 8px;
 }

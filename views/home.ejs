@@ -5,7 +5,7 @@
 
   <div class="home_img">
     <% movies.forEach(function(movie) { %>
-    <a href="#"
+    <a href="/detail/<%= movie._id %>"
       ><img class="year_ago_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
     /></a>
     <% }) %>
@@ -22,7 +22,7 @@
   <% movies.forEach(function(movie) { %>
   <table class="row">
     <td width="20%">
-      <a href="#"
+      <a href="/detail/<%= movie._id %>"
         ><img class="this_week_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
       /></a>
     </td>

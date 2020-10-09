@@ -9,7 +9,7 @@
   <% } else { movies.forEach(function(movie) { %>
   <table class="row">
     <td width="20%">
-      <a href="#"
+      <a href="/detail/<%= movie._id %>"
         ><img class="this_week_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
       /></a>
     </td>

@@ -49,25 +49,31 @@ app.get('/', function (req, res) {
 });
 
 // Year Route
-app.get('/year', function (req, res) {
-  Movie.find({ year: '2020' }, function (err, movies) {
+app.get('/year/:yearID', function (req, res) {
+  const requestedID = req.params.yearID;
+
+  Movie.find({ year: requestedID }, function (err, movies) {
     if (err) {
       console.log(err);
       return;
     } else {
-      res.render('year', { movies: movies });
+      res.render('year', { year: requestedID, movies: movies });
     }
   });
 });
 
+app.post('/year', function (req, res) {
+  const yearID = req.body.year;
+
+  res.redirect('/year/' + yearID);
+});
+
 // Genre Route
 app.get('/genre', function (req, res) {
-  /*
   Movie.find({}, function (err, movies) {
     if (err) return console.error(err);
     res.render('genre', { movies: movies });
   });
-  */
 });
 
 // Search Route
@@ -85,16 +91,12 @@ app.post('/search', function (req, res) {
         no_data = 1;
       }
 
-      console.log(no_data);
-      console.log(search);
-      console.log(movies);
-
       res.render('search', { search: search, no_data: no_data, movies: movies });
     }
   });
 });
 
-// Recommed Route
+// Popular Route
 app.get('/popular', function (req, res) {
   Movie.findOne({ title: '오!문희' }, function (err, movie) {
     if (err) {
@@ -102,6 +104,20 @@ app.get('/popular', function (req, res) {
       return;
     } else {
       res.render('popular', { movie: movie });
+    }
+  });
+});
+
+// Detail Route
+app.get('/detail/:movieID', function (req, res) {
+  const requestedID = req.params.movieID;
+
+  Movie.findOne({ _id: requestedID }, function (err, movie) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      res.render('detail', { movie: movie });
     }
   });
 });

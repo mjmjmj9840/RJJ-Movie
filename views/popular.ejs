@@ -1,11 +1,11 @@
 <%- include("partials/header"); %>
 
 <section class="content">
-  <p class="text"><a>POPULAR</a></p>
+  <p class="pop"><a>POPULAR</a></p>
 
   <div class="popular">
     <% for (var i = 0; i < 15; i++) { %>
-    <a href="#"
+    <a href="/detail/<%= movie._id %>"
       ><img class="popular_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
     /></a>
     <% } %>

@@ -1,0 +1,20 @@
+<%- include("partials/header"); %>
+
+<section class="content">
+  <table class="row">
+    <td width="20%">
+      <a href="#"
+        ><img class="detail_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+      /></a>
+    </td>
+    <td class="detail">
+      <div class="detail_title"><%=movie.title%></div>
+      <div class="detail_content"><%=movie.en_title%>, <%=movie.year%>.<%=movie.date%></div>
+      <div class="detail_content"><% movie.genre.forEach(function(g) { %> <%=g%>, <% }) %></div>
+      <div class="detail_content">평점: <%=movie.rating%></div>
+      <div class="detail_content"><%=movie.content%></div>
+    </td>
+  </table>
+</section>
+
+<%- include("partials/footer"); %>

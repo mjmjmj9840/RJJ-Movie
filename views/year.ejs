@@ -1,26 +1,24 @@
 <%- include("partials/header"); %>
 
 <section class="content">
-  <p class="text"><a>YEAR</a></p>
   <div class="year_select_label">
-    <select class="year_select">
-      <option>2000</option>
-      <option>2001</option>
-      <option>2002</option>
-      <option>2003</option>
-      <option>2004</option>
-      <option>2005</option>
-      <option>2006</option>
-      <option>2007</option>
-      <option>2008</option>
-      <option>2009</option>
-      <option>2010</option>
-    </select>
+    <label class="year_reg">YEAR</label>
+    <form action="/year" method="post">
+      <select class="year_select" name="year" onchange="this.form.submit()">
+        <% for(let i = 2020; i >= 2000; i--) { if( i.toString() === year) { %>
+        <option selected><%= i %></option>
+        <% } else { %>
+        <option><%= i %></option>
+        <%} } %>
+      </select>
+    </form>
   </div>
 
   <div class="year">
     <% movies.forEach(function(movie) { %>
-    <a href="#"><img class="year_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>" /></a>
+    <a href="/detail/<%= movie._id %>"
+      ><img class="year_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+    /></a>
     <% }) %>
   </div>
 </section>
