@@ -75,7 +75,11 @@ app.get('/', function (req, res) {
             console.log(err);
             return;
           } else {
-            res.render('home', { ago_movies: ago_movies, weekly_movies: weekly_movies });
+            res.render('home', {
+              year_ago: year_ago,
+              ago_movies: ago_movies,
+              weekly_movies: weekly_movies,
+            });
           }
         });
       }
