@@ -25,34 +25,71 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Movie Schema
 const moviesSchema = new mongoose.Schema({
+  no: Number,
   title: String,
-  en_title: String,
-  year: String,
-  date: String,
+  imgURL: String,
   genre: Array,
-  content: String,
-  rating: Number,
+  date: Date,
+  point: String,
+  director: Array,
+  cast: Array,
 });
 
 const Movie = new mongoose.model('Movie', moviesSchema);
 
+// 전역 변수
+var year_ago_date, year_ago;
+
+// 1 year ago
+year_ago_date = new Date();
+year_ago = year_ago_date.getFullYear() - 1;
+
+/*
+// 하루에 한 번 실행되는 함수
+setInterval(function () {
+  // 1 year ago
+  year_ago_date = new Date();
+  year_ago = year_ago_date.getFullYear() - 1;
+}, 86400000);
+
+*/
+
 // Home Route
 app.get('/', function (req, res) {
-  Movie.find({ rating: { $gte: 8.5 } }, function (err, movies) {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      res.render('home', { movies: movies });
+  // 1 year ago movies
+  Movie.find(
+    {
+      date: {
+        $gte: new Date(year_ago, 1, 1, 0, 0, 0, 0),
+        $lte: new Date(year_ago, 12, 31, 0, 0, 0, 0),
+      },
+    },
+    function (err, ago_movies) {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        // this week movies (ranking 1~10)
+        Movie.find({ no: { $lte: 10 } }, function (err, weekly_movies) {
+          if (err) {
+            console.log(err);
+            return;
+          } else {
+            res.render('home', { ago_movies: ago_movies, weekly_movies: weekly_movies });
+          }
+        });
+      }
     }
-  });
+  );
 });
 
 // Year Route
 app.get('/year/:yearID', function (req, res) {
   const requestedID = req.params.yearID;
+  let year_start = new Date(requestedID, 1, 1, 0, 0, 0, 0);
+  let year_end = new Date(requestedID, 12, 31, 0, 0, 0, 0);
 
-  Movie.find({ year: requestedID }, function (err, movies) {
+  Movie.find({ date: { $gte: year_start, $lte: year_end } }, function (err, movies) {
     if (err) {
       console.log(err);
       return;
@@ -76,7 +113,7 @@ app.get('/genre/:genreID', function (req, res) {
     '드라마',
     '판타지',
     '공포',
-    '로맨스',
+    '멜로/로맨스',
     '모험',
     '스릴러',
     '다큐멘터리',
@@ -109,7 +146,7 @@ app.post('/search', function (req, res) {
   const search = req.body.search;
   let no_data = 0;
 
-  Movie.find({ title: search }, function (err, movies) {
+  Movie.find({ title: { $regex: search } }, function (err, movies) {
     if (err) {
       console.log(err);
       return;
@@ -126,12 +163,12 @@ app.post('/search', function (req, res) {
 
 // Popular Route
 app.get('/popular', function (req, res) {
-  Movie.findOne({ title: '오!문희' }, function (err, movie) {
+  Movie.find({ no: { $gte: 1, $lte: 50 } }, function (err, movies) {
     if (err) {
       console.log(err);
       return;
     } else {
-      res.render('popular', { movie: movie });
+      res.render('popular', { movies: movies });
     }
   });
 });

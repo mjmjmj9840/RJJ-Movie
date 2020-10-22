@@ -4,11 +4,15 @@
   <p class="text"><a>1 YEAR AGO TODAY</a></p>
 
   <div class="home_img">
-    <% movies.forEach(function(movie) { %>
+    <% if(ago_movies.length == 0) { %>
+    <div class="no_result">
+      <p class="text">해당 데이터가 없습니다.</p>
+    </div>
+    <% } else { %> <% ago_movies.forEach(function(movie) { %>
     <a href="/detail/<%= movie._id %>"
-      ><img class="year_ago_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+      ><img class="year_ago_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
     /></a>
-    <% }) %>
+    <% })} %>
   </div>
 
   <p class="more">
@@ -19,17 +23,19 @@
     <a>POPULAR MOVIES THIS WEEK</a>
   </p>
 
-  <% movies.forEach(function(movie) { %>
+  <% weekly_movies.forEach(function(movie) { %>
   <table class="row">
     <td width="20%">
       <a href="/detail/<%= movie._id %>"
-        ><img class="this_week_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+        ><img class="this_week_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
       /></a>
     </td>
     <td class="this_week">
       <div class="this_week_title"><%=movie.title%></div>
-      <div class="this_week_content"><%=movie.en_title%>, <%=movie.year%></div>
-      <div class="this_week_content"><%=movie.content%></div>
+      <div class="this_week_content">개봉일: <%=movie.date.toISOString().slice(0,10)%></div>
+      <div class="this_week_content">장르: <%=movie.genre%></div>
+      <div class="this_week_content">감독: <%=movie.director%></div>
+      <div class="this_week_content">출연: <%=movie.cast%></div>
     </td>
   </table>
   <% }) %>

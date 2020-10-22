@@ -1,18 +1,16 @@
 <%- include("partials/header"); %>
 
 <section class="content">
-  <table class="row">
+  <table>
     <td width="20%">
-      <a href="#"
-        ><img class="detail_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
-      /></a>
+      <a href="#"><img class="detail_img" src="<%=movie.imgURL%>.jpg" alt="<%=movie.title%>" /></a>
     </td>
     <td class="detail">
       <div class="detail_title"><%=movie.title%></div>
-      <div class="detail_content"><%=movie.en_title%>, <%=movie.year%>.<%=movie.date%></div>
-      <div class="detail_content"><% movie.genre.forEach(function(g) { %> <%=g%>, <% }) %></div>
-      <div class="detail_content">평점: <%=movie.rating%></div>
-      <div class="detail_content"><%=movie.content%></div>
+      <div class="detail_content">개봉일: <%=movie.date.toISOString().slice(0,10)%></div>
+      <div class="detail_content">장르: <%=movie.genre%></div>
+      <div class="detail_content">감독: <%=movie.director%></div>
+      <div class="detail_content">출연: <%=movie.cast%></div>
     </td>
   </table>
 </section>

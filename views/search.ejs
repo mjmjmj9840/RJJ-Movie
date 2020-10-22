@@ -10,13 +10,15 @@
   <table class="row">
     <td width="20%">
       <a href="/detail/<%= movie._id %>"
-        ><img class="this_week_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+        ><img class="this_week_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
       /></a>
     </td>
     <td class="this_week">
       <div class="this_week_title"><%=movie.title%></div>
-      <div class="this_week_content"><%=movie.en_title%>, <%=movie.year%></div>
-      <div class="this_week_content"><%=movie.content%></div>
+      <div class="this_week_content">개봉일: <%=movie.date.toISOString().slice(0,10)%></div>
+      <div class="this_week_content">장르: <%=movie.genre%></div>
+      <div class="this_week_content">감독: <%=movie.director%></div>
+      <div class="this_week_content">출연: <%=movie.cast%></div>
     </td>
   </table>
   <% }) } %>

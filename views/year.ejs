@@ -15,11 +15,15 @@
   </div>
 
   <div class="year">
-    <% movies.forEach(function(movie) { %>
+    <% if(movies.length == 0) { %>
+    <div class="no_result">
+      <p class="text">해당 데이터가 없습니다.</p>
+    </div>
+    <% } else { movies.forEach(function(movie) { %>
     <a href="/detail/<%= movie._id %>"
-      ><img class="year_img" src="/<%=movie.en_title%>.jpg" alt="<%=movie.title%>"
+      ><img class="year_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
     /></a>
-    <% }) %>
+    <% })} %>
   </div>
 </section>
 
