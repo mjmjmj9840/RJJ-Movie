@@ -1,0 +1,296 @@
+@charset "utf-8";
+body {
+  margin: 0;
+  font-family: 'Noto Serif KR', serif;
+}
+
+/* header */
+
+header {
+  background-color: black;
+  padding: 3% 0 1% 0;
+}
+
+header a,
+header a :visited {
+  text-decoration: none;
+  color: white;
+  padding-left: 17%;
+  color: white;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 320%;
+}
+
+.navi {
+  background-color: black;
+  padding: 0.1%;
+}
+
+.search {
+  padding-left: 5%;
+  padding-top: 0.3%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+input {
+  width: 55%;
+  padding: 2%;
+  border-radius: 15px;
+  outline: none;
+}
+
+button {
+  width: 80px;
+  padding: 2%;
+  border-radius: 15px;
+  outline: none;
+  background-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.navi ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.navi ul li {
+  display: inline;
+  float: left;
+  font-size: 110%;
+  font-weight: lighter;
+}
+
+.navi a,
+.navi a:visited {
+  padding: 7px 5px 3px 5px;
+  text-align: center;
+  display: block;
+  color: #fff;
+  width: 120px;
+  text-decoration: none;
+}
+
+.navi a:hover,
+.navi a:active {
+  color: black;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.content {
+  /* 본문 */
+  width: 100%;
+  float: left;
+}
+
+.text {
+  margin-top: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.text a {
+  border-bottom: 3px double;
+}
+
+.more a,
+.more a :visited {
+  color: black;
+}
+
+.more {
+  text-align: right;
+  border-bottom: 2px solid black;
+  padding-top: 1%;
+  padding-bottom: 3%;
+  padding-right: 2%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* home */
+.home_img,
+.text {
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.year_ago_img {
+  width: 270px;
+}
+
+.this_week_img {
+  width: 100%;
+}
+
+table {
+  margin: 5%;
+  padding-bottom: 5%;
+}
+
+.row {
+  border-bottom: 2px solid black;
+}
+
+.this_week {
+  padding: 5%;
+}
+
+.this_week_title {
+  font-size: x-large;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.this_week_content {
+  font-size: medium;
+  padding-top: 1%;
+}
+
+/* popular */
+
+.pop {
+  font-size: 20px;
+  width: 115px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 10%;
+  margin-top: 3%;
+  border-bottom: 3px double;
+  text-align: center;
+}
+
+.popular {
+  margin: 5%;
+}
+
+.popular_img {
+  width: 15%;
+  margin: 2%;
+}
+
+/* yaer */
+.year_select_label {
+  margin-left: 10%;
+  margin-top: 3%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.year_reg {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-bottom: 3px double;
+  margin-right: 2%;
+  width: 67px;
+  text-align: center;
+}
+
+.year_select {
+  border-radius: 5px;
+  padding: 0.2%;
+  outline: none;
+  width: 70px;
+}
+
+.year {
+  margin: 5%;
+}
+
+.year_img {
+  width: 15%;
+  margin: 2%;
+}
+
+/* genre */
+.genre_select_label {
+  margin-left: 10%;
+  margin-top: 3%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.genre_reg {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-bottom: 3px double;
+  margin-right: 2%;
+  width: 80px;
+  text-align: center;
+}
+
+.genre_select {
+  border-radius: 5px;
+  padding: 0.2%;
+  outline: none;
+  width: 115px;
+}
+
+.genre {
+  margin: 5%;
+}
+
+.genre_img {
+  width: 15%;
+  margin: 2%;
+}
+
+/* search */
+.no_result {
+  margin: 10%;
+  text-align: center;
+}
+
+/* detail */
+
+.detail_img {
+  width: 100%;
+}
+
+.detail {
+  padding: 0 5%;
+}
+
+.detail_title {
+  font-size: x-large;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.detail_content {
+  font-size: medium;
+  padding-top: 1%;
+}
+
+/* image hover */
+.year_ago_img:hover,
+.year_ago_img:active,
+.this_week_img:hover,
+.this_week_img:active,
+.popular_img:hover,
+.popular_img:active,
+.year_img:hover,
+.year_img:active,
+.genre_img:hover,
+.genre_img:active {
+  border: 7px groove black;
+  border-radius: 8px;
+}
+
+/* footer */
+
+footer {
+  clear: both;
+  padding: 1%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
