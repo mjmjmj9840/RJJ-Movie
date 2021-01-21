@@ -1,0 +1,30 @@
+<%- include("partials/header"); %>
+
+<section class="content">
+  <div class="year_select_label">
+    <label class="year_reg">YEAR</label>
+    <form action="/year" method="post">
+      <select class="year_select" name="year" onchange="this.form.submit()">
+        <% for(let i = 2020; i >= 2000; i--) { if( i.toString() === year) { %>
+        <option selected><%= i %></option>
+        <% } else { %>
+        <option><%= i %></option>
+        <%} } %>
+      </select>
+    </form>
+  </div>
+
+  <div class="year">
+    <% if(movies.length == 0) { %>
+    <div class="no_result">
+      <p class="text">해당 데이터가 없습니다.</p>
+    </div>
+    <% } else { movies.forEach(function(movie) { %>
+    <a href="/detail/<%= movie._id %>"
+      ><img class="year_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
+    /></a>
+    <% })} %>
+  </div>
+</section>
+
+<%- include("partials/footer"); %>

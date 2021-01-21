@@ -1,0 +1,30 @@
+<%- include("partials/header"); %>
+
+<section class="content">
+  <div class="genre_select_label">
+    <label class="genre_reg">GENRE</label>
+    <form action="/genre" method="post">
+      <select class="genre_select" name="genre" onchange="this.form.submit()">
+        <% for(let i = 0; i < genre.length; i++) { if(i.toString() === genreID) { %>
+        <option value="<%= i %>" selected><%= genre[i]%></option>
+        <% } else { %>
+        <option value="<%= i %>"><%= genre[i]%></option>
+        <% } } %>
+      </select>
+    </form>
+  </div>
+
+  <div class="genre">
+    <% if(movies.length == 0) { %>
+    <div class="no_result">
+      <p class="text">해당 데이터가 없습니다.</p>
+    </div>
+    <% } else { movies.forEach(function(movie) { %>
+    <a href="/detail/<%= movie._id %>"
+      ><img class="genre_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
+    /></a>
+    <% })} %>
+  </div>
+</section>
+
+<%- include("partials/footer"); %>
