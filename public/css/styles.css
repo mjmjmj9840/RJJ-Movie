@@ -25,7 +25,7 @@ header a :visited {
   background-color: black;
   padding: 0.1%;
 }
-.login{
+.login {
   padding-left: 10%;
   padding-top: 0.3%;
 }
@@ -67,7 +67,7 @@ button {
   font-weight: lighter;
 }
 
-.login{
+.login {
   display: inline;
   float: left;
   font-size: 100%;
@@ -269,11 +269,11 @@ table {
   padding: 0 5%;
 }
 
-.like{
+.like {
   text-align: right;
 }
 
-.detail_like{
+.detail_like {
   font-family: 'Potta One', cursive;
   font-size: 50px;
   color: gray;
@@ -293,7 +293,7 @@ table {
 
 /* login */
 
-.boxs{
+.boxs {
   padding: 4%;
 
   text-align: center;
@@ -302,37 +302,37 @@ table {
   width: 50%;
 }
 
-.login_link{
+.login_link {
   padding: 2%;
   border-radius: 25px;
 }
 
-.login_link a{
+.login_link a {
   font-size: 30px;
   color: rgb(56, 56, 56);
   text-decoration: none;
   font-family: 'Oswald', sans-serif;
 }
 
-.box1 .login_link{
+.box1 .login_link {
   background-color: rgb(116, 106, 106);
 }
-.box2 .login_link{
+.box2 .login_link {
   background-color: rgb(172, 154, 154);
 }
-.box3 .login_link{
+.box3 .login_link {
   background-color: rgb(193, 185, 167);
 }
-.box4 .login_link{
+.box4 .login_link {
   background-color: rgb(165, 162, 162);
 }
-.box5 .login_link{
-  background-color:rgb(176, 181, 196);
+.box5 .login_link {
+  background-color: rgb(176, 181, 196);
 }
-.box6 .login_link{
+.box6 .login_link {
   background-color: rgb(168, 158, 173);
 }
-.box7 .login_link{
+.box7 .login_link {
   background-color: rgb(243, 222, 222);
 }
 
@@ -353,11 +353,11 @@ table {
 
 /* footer */
 
-footer{
-	clear:both;
-	padding: 2% 0 2% 0;
-	background-color:black;
-	color:white;	
-  text-align:center;
+footer {
+  clear: both;
+  padding: 2% 0 2% 0;
+  background-color: black;
+  color: white;
+  text-align: center;
   font-size: x-small;
 }

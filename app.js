@@ -2,6 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const passportLocalMongoose = require('passport-local-mongoose');
+const session = require('express-session');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const findOrCreate = require('mongoose-findorcreate');
 const { PythonShell } = require('python-shell');
 const schedule = require('node-schedule');
 require('dotenv').config();
@@ -13,6 +18,18 @@ app.set('view engine', 'ejs');
 
 // Static File
 app.use(express.static('public'));
+
+// Initialize Session and Passport
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,22 +67,49 @@ const moviesSchema = new mongoose.Schema({
 
 const Movie = new mongoose.model('Movie', moviesSchema);
 
-// 전역 변수
-var year_ago_date, year_ago;
+// User Schema
+const userSchema = new mongoose.Schema({
+  userID: String,
+  like: Array,
+});
 
-// 1 year ago
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
+
+const User = new mongoose.model('User', userSchema);
+
+// Passport Configure Strategy
+passport.use(User.createStrategy());
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'http://localhost:8080/login/google/callback',
+    },
+    function (accessToken, refreshToken, profile, done) {
+      User.findOrCreate({ userID: profile.id }, function (err, user) {
+        return done(err, user);
+      });
+    }
+  )
+);
+
+// for calculate 1 year ago
+var year_ago_date, year_ago;
 year_ago_date = new Date();
 year_ago = year_ago_date.getFullYear() - 1;
-
-/*
-// 하루에 한 번 실행되는 함수
-setInterval(function () {
-  // 1 year ago
-  year_ago_date = new Date();
-  year_ago = year_ago_date.getFullYear() - 1;
-}, 86400000);
-
-*/
 
 // Home Route
 app.get('/', function (req, res) {
@@ -88,11 +132,21 @@ app.get('/', function (req, res) {
             console.log(err);
             return;
           } else {
-            res.render('home', {
-              year_ago: year_ago,
-              ago_movies: ago_movies,
-              weekly_movies: weekly_movies,
-            });
+            if (req.isAuthenticated()) {
+              res.render('home', {
+                headerName: 'header-login',
+                year_ago: year_ago,
+                ago_movies: ago_movies,
+                weekly_movies: weekly_movies,
+              });
+            } else {
+              res.render('home', {
+                headerName: 'header',
+                year_ago: year_ago,
+                ago_movies: ago_movies,
+                weekly_movies: weekly_movies,
+              });
+            }
           }
         });
       }
@@ -111,7 +165,11 @@ app.get('/year/:yearID', function (req, res) {
       console.log(err);
       return;
     } else {
-      res.render('year', { year: requestedID, movies: movies });
+      if (req.isAuthenticated()) {
+        res.render('year', { headerName: 'header-login', year: requestedID, movies: movies });
+      } else {
+        res.render('year', { headerName: 'header', year: requestedID, movies: movies });
+      }
     }
   });
 });
@@ -147,7 +205,21 @@ app.get('/genre/:genreID', function (req, res) {
       console.log(err);
       return;
     } else {
-      res.render('genre', { genre: genre, genreID: requestedID, movies: movies });
+      if (req.isAuthenticated()) {
+        res.render('genre', {
+          headerName: 'header-login',
+          genre: genre,
+          genreID: requestedID,
+          movies: movies,
+        });
+      } else {
+        res.render('genre', {
+          headerName: 'header',
+          genre: genre,
+          genreID: requestedID,
+          movies: movies,
+        });
+      }
     }
   });
 });
@@ -173,7 +245,21 @@ app.post('/search', function (req, res) {
         no_data = 1;
       }
 
-      res.render('search', { search: search, no_data: no_data, movies: movies });
+      if (req.isAuthenticated()) {
+        res.render('search', {
+          headerName: 'header-login',
+          search: search,
+          no_data: no_data,
+          movies: movies,
+        });
+      } else {
+        res.render('search', {
+          headerName: 'header',
+          search: search,
+          no_data: no_data,
+          movies: movies,
+        });
+      }
     }
   });
 });
@@ -185,7 +271,17 @@ app.get('/popular', function (req, res) {
       console.log(err);
       return;
     } else {
-      res.render('popular', { movies: movies });
+      if (req.isAuthenticated()) {
+        res.render('popular', {
+          headerName: 'header-login',
+          movies: movies,
+        });
+      } else {
+        res.render('popular', {
+          headerName: 'header',
+          movies: movies,
+        });
+      }
     }
   });
 });
@@ -199,9 +295,45 @@ app.get('/detail/:movieID', function (req, res) {
       console.log(err);
       return;
     } else {
-      res.render('detail', { movie: movie });
+      if (req.isAuthenticated()) {
+        res.render('popular', {
+          headerName: 'header-login',
+          movie: movie,
+        });
+      } else {
+        res.render('popular', {
+          headerName: 'header',
+          movie: movie,
+        });
+      }
     }
   });
+});
+
+// Login Route
+app.get('/login', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render('login', { headerName: 'header-login' });
+  } else {
+    res.render('login', { headerName: 'header' });
+  }
+});
+
+// Google Login
+app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+
+app.get(
+  '/login/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/login',
+    successRedirect: '/',
+  })
+);
+
+// Logout
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
 });
 
 // Starting Server
