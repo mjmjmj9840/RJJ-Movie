@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+const { PythonShell } = require('python-shell');
 require('dotenv').config();
 
 var app = express();
@@ -14,6 +15,15 @@ app.use(express.static('public'));
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Crawling Movies
+PythonShell.run('./python/naver_movie.py', null, function (err, data) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(data);
+});
 
 // MongoDB Connect and Set
 mongoose.connect(process.env.MONGODB_URI, {
