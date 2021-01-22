@@ -46,14 +46,11 @@
 
 <script>
   var btn = document.getElementById('submit');
-  
-  btn.addEventListener('click', function(){
-    if(btn.style.color == 'black')
-      btn.style.color= 'gray';
-    else
-    btn.style.color= 'black';
+
+  btn.addEventListener('click', function () {
+    if (btn.style.color == 'black') btn.style.color = 'gray';
+    else btn.style.color = 'black';
   });
-  
 </script>
 
 <%- include("partials/footer"); %>
