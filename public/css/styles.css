@@ -280,6 +280,13 @@ table {
   text-decoration: none;
 }
 
+.detail_dislike {
+  font-family: 'Potta One', cursive;
+  font-size: 50px;
+  color: gold;
+  text-decoration: none;
+}
+
 .detail_title {
   font-size: x-large;
   font-weight: bold;

@@ -1,33 +1,15 @@
 <%- include("partials/" + headerName); %>
 
 <section class="content">
-  <p class="text"><a>1 YEAR AGO TODAY</a></p>
-
-  <div class="home_img">
-    <% if(ago_movies.length == 0) { %>
-    <div class="no_result">
-      <p class="text">해당 데이터가 없습니다.</p>
-    </div>
-    <% } else if(ago_movies.length < 4) { ago_movies.forEach(function(movie) { %>
-    <a href="/detail/<%= movie._id %>">
-      <img class="year_ago_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
-    /></a>
-    <% })} else { for(var i = 0; i < 4; i++) { %>
-    <a href="/detail/<%= ago_movies[i]._id %>"
-      ><img class="year_ago_img" src="<%=ago_movies[i].imgURL%>" alt="<%=ago_movies[i].title%>"
-    /></a>
-    <% }} %>
-  </div>
-
-  <p class="more">
-    <a href="/year/<%=year_ago%>">MORE</a>
-  </p>
-
   <p class="text">
-    <a>POPULAR MOVIES THIS WEEK</a>
+    <a>MY MOVIES</a>
   </p>
 
-  <% weekly_movies.forEach(function(movie) { %>
+  <% if(movies.length == 0) { %>
+  <div class="no_result">
+    <p class="text">스크랩한 영화가 없습니다.</p>
+  </div>
+  <% } else { movies.forEach(function(movie) { %>
   <table class="row">
     <td width="20%">
       <a href="/detail/<%= movie._id %>"
@@ -59,7 +41,7 @@
       <% } %>
     </td>
   </table>
-  <% }) %>
+  <% }) } %>
 </section>
 
 <%- include("partials/footer"); %>

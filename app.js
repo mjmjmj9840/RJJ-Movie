@@ -25,7 +25,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 
 app.use(passport.initialize());
@@ -96,14 +96,14 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:8080/login/google/callback',
+      callbackURL: 'https://rojinjin-moive.herokuapp.com/login/google/callback',
     },
     function (accessToken, refreshToken, profile, done) {
       User.findOrCreate({ userID: profile.id }, function (err, user) {
         return done(err, user);
       });
-    }
-  )
+    },
+  ),
 );
 
 // for calculate 1 year ago
@@ -138,6 +138,7 @@ app.get('/', function (req, res) {
                 year_ago: year_ago,
                 ago_movies: ago_movies,
                 weekly_movies: weekly_movies,
+                user_movies: req.user.like,
               });
             } else {
               res.render('home', {
@@ -145,12 +146,13 @@ app.get('/', function (req, res) {
                 year_ago: year_ago,
                 ago_movies: ago_movies,
                 weekly_movies: weekly_movies,
+                user_movies: [],
               });
             }
           }
         });
       }
-    }
+    },
   );
 });
 
@@ -296,18 +298,76 @@ app.get('/detail/:movieID', function (req, res) {
       return;
     } else {
       if (req.isAuthenticated()) {
-        res.render('popular', {
+        res.render('detail', {
           headerName: 'header-login',
           movie: movie,
+          user_movies: req.user.like,
         });
       } else {
-        res.render('popular', {
+        res.render('detail', {
           headerName: 'header',
           movie: movie,
+          user_movies: [],
         });
       }
     }
   });
+});
+
+// Scrap Route
+app.get('/scrap', function (req, res) {
+  if (!req.isAuthenticated()) {
+    res.send('<script>alert("로그인이 필요합니다. "); window.location.href = "/login"; </script>');
+  } else {
+    const userLike = req.user.like;
+
+    Movie.find({ title: { $in: userLike } }, function (err, movies) {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        res.render('scrap', {
+          headerName: 'header-login',
+          movies: movies,
+          user_movies: req.user.like,
+        });
+      }
+    });
+  }
+});
+
+app.post('/like', function (req, res) {
+  if (!req.isAuthenticated()) {
+    res.send('<script>alert("로그인이 필요합니다. "); window.location.href = "/login"; </script>');
+  } else {
+    const movieTitle = req.body.like;
+    const requestUser = req.user.userID;
+
+    User.updateOne({ userID: requestUser }, { $push: { like: [movieTitle] } }, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect('/scrap');
+      }
+    });
+  }
+});
+
+app.post('/dislike', function (req, res) {
+  if (!req.isAuthenticated()) {
+    res.send('<script>alert("로그인이 필요합니다. "); window.location.href = "/login"; </script>');
+  } else {
+    const movieTitle = req.body.dislike;
+    const requestUser = req.user.userID;
+
+    User.updateOne({ userID: requestUser }, { $pull: { like: movieTitle } }, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect('/scrap');
+      }
+    });
+  }
 });
 
 // Login Route
@@ -327,7 +387,7 @@ app.get(
   passport.authenticate('google', {
     failureRedirect: '/login',
     successRedirect: '/',
-  })
+  }),
 );
 
 // Logout
