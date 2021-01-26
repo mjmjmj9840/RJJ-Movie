@@ -91,15 +91,21 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+// https://rojinjin-moive.herokuapp.com/login/google/callback
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'https://rojinjin-moive.herokuapp.com/login/google/callback',
+      callbackURL: 'http://localhost:8080/login/google/callback',
+      userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
     },
     function (accessToken, refreshToken, profile, done) {
-      User.findOrCreate({ userID: profile.id }, function (err, user) {
+      User.findOrCreate({ username: profile.emails[0].value, userID: profile.id }, function (
+        err,
+        user,
+      ) {
         return done(err, user);
       });
     },
@@ -380,7 +386,7 @@ app.get('/login', function (req, res) {
 });
 
 // Google Login
-app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get(
   '/login/google/callback',
