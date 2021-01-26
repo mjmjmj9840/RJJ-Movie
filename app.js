@@ -91,14 +91,12 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-// https://rojinjin-moive.herokuapp.com/login/google/callback
-
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:8080/login/google/callback',
+      callbackURL: 'https://rojinjin-moive.herokuapp.com/login/google/callback',
       userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
     },
     function (accessToken, refreshToken, profile, done) {
