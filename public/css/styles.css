@@ -278,6 +278,8 @@ table {
   font-size: 50px;
   color: gray;
   text-decoration: none;
+  border: 0;
+  outline: 0;
 }
 
 .detail_dislike {
@@ -285,6 +287,8 @@ table {
   font-size: 50px;
   color: gold;
   text-decoration: none;
+  border: 0;
+  outline: 0;
 }
 
 .detail_title {
