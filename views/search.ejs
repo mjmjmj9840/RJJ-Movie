@@ -1,27 +1,27 @@
 <%- include("partials/" + headerName); %>
 <section class="content">
-  <p class="text"><a>SEARCH RESULTS FOR <%=search%></a></p>
+    <p class="text"><a>SEARCH RESULTS FOR <%=search%></a></p>
 
-  <% if(no_data == 1) { %>
-  <div class="no_result">
-    <p class="text">"<%=search%>"에 대한 검색결과가 없습니다.</p>
-  </div>
-  <% } else { movies.forEach(function(movie) { %>
-  <table class="row">
-    <td width="20%">
-      <a href="/detail/<%= movie._id %>"
-        ><img class="this_week_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
-      /></a>
-    </td>
-    <td class="this_week">
-      <div class="this_week_title"><%=movie.title%></div>
-      <div class="this_week_content">개봉일: <%=movie.date.toISOString().slice(0,10)%></div>
-      <div class="this_week_content">장르: <%=movie.genre%></div>
-      <div class="this_week_content">감독: <%=movie.director%></div>
-      <div class="this_week_content">출연: <%=movie.cast%></div>
-    </td>
-  </table>
-  <% }) } %>
+    <% if(no_data == 1) { %>
+    <div class="no_result">
+        <p class="text">"<%=search%>"에 대한 검색결과가 없습니다.</p>
+    </div>
+    <% } else { movies.forEach(function(movie) { %>
+    <table class="row">
+        <td width="20%">
+            <a href="/detail/<%= movie._id %>"
+                ><img class="this_week_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
+            /></a>
+        </td>
+        <td class="this_week">
+            <div class="this_week_title"><%=movie.title%></div>
+            <div class="this_week_content">개봉일: <%=movie.date%></div>
+            <div class="this_week_content">장르: <%=movie.genre%></div>
+            <div class="this_week_content">감독: <%=movie.director%></div>
+            <div class="this_week_content">출연: <%=movie.cast%></div>
+        </td>
+    </table>
+    <% }) } %>
 </section>
 
 <%- include("partials/footer"); %>

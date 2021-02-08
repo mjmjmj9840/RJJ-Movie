@@ -1,47 +1,56 @@
 <%- include("partials/" + headerName); %>
 
 <section class="content">
-  <p class="text">
-    <a>MY MOVIES</a>
-  </p>
+    <p class="text">
+        <a>MY MOVIES</a>
+    </p>
 
-  <% if(movies.length == 0) { %>
-  <div class="no_result">
-    <p class="text">스크랩한 영화가 없습니다.</p>
-  </div>
-  <% } else { movies.forEach(function(movie) { %>
-  <table class="row">
-    <td width="20%">
-      <a href="/detail/<%= movie._id %>"
-        ><img class="this_week_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
-      /></a>
-    </td>
-    <td class="this_week">
-      <div class="this_week_title"><%=movie.title%></div>
-      <div class="this_week_content">개봉일: <%=movie.date.toISOString().slice(0,10)%></div>
-      <div class="this_week_content">장르: <%=movie.genre%></div>
-      <div class="this_week_content">감독: <%=movie.director%></div>
-      <div class="this_week_content">출연: <%=movie.cast%></div>
-    </td>
-    <td class="like">
-      <% if(headerName == "header-login") { %> <% if(user_movies.includes(movie.title)) { %>
-      <form action="/dislike" method="post">
-        <button class="detail_dislike" name="dislike" type="submit" value="<%=movie.title%>">
-          ★
-        </button>
-      </form>
-      <% } else {%>
-      <form action="/like" method="post">
-        <button class="detail_like" name="like" type="submit" value="<%=movie.title%>">★</button>
-      </form>
-      <% } %> <% } else { %>
-      <form action="/like" method="post">
-        <button class="detail_like" name="like" type="submit" value="<%=movie.title%>">★</button>
-      </form>
-      <% } %>
-    </td>
-  </table>
-  <% }) } %>
+    <% if(movies.length == 0) { %>
+    <div class="no_result">
+        <p class="text">스크랩한 영화가 없습니다.</p>
+    </div>
+    <% } else { movies.forEach(function(movie) { %>
+    <table class="row">
+        <td width="20%">
+            <a href="/detail/<%= movie._id %>"
+                ><img class="this_week_img" src="<%=movie.imgURL%>" alt="<%=movie.title%>"
+            /></a>
+        </td>
+        <td class="this_week">
+            <div class="this_week_title"><%=movie.title%></div>
+            <div class="this_week_content">개봉일: <%=movie.date%></div>
+            <div class="this_week_content">장르: <%=movie.genre%></div>
+            <div class="this_week_content">감독: <%=movie.director%></div>
+            <div class="this_week_content">출연: <%=movie.cast%></div>
+        </td>
+        <td class="like">
+            <% if(headerName == "header-login") { %> <% if(user_movies.includes(movie.title)) { %>
+            <form action="/dislike" method="post">
+                <button
+                    class="detail_dislike"
+                    name="dislike"
+                    type="submit"
+                    value="<%=movie.title%>"
+                >
+                    ★
+                </button>
+            </form>
+            <% } else {%>
+            <form action="/like" method="post">
+                <button class="detail_like" name="like" type="submit" value="<%=movie.title%>">
+                    ★
+                </button>
+            </form>
+            <% } %> <% } else { %>
+            <form action="/like" method="post">
+                <button class="detail_like" name="like" type="submit" value="<%=movie.title%>">
+                    ★
+                </button>
+            </form>
+            <% } %>
+        </td>
+    </table>
+    <% }) } %>
 </section>
 
 <%- include("partials/footer"); %>

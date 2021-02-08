@@ -38,8 +38,7 @@ for n in range(0, len(list)):
     # 개봉 일자
     date = list[n].find(class_ = 'info_txt1').find('dd').text
     dateList = [date.strip()]
-    dateList2 = '20' + dateList[0][-11:-3] + ' 00:00:00'
-    convert_date = datetime.strptime(dateList2, "%Y.%m.%d %H:%M:%S")
+    dateList2 = '20' + dateList[0][-11:-3]
     # print("개봉 일자 : \t", convert_date)
     # 네티즌 평점
     point = list[n].find(class_="num").text
@@ -60,6 +59,6 @@ for n in range(0, len(list)):
     except IndexError:
         # print("출연 배우 :\t 정보 없음")
         castList = "정보 없음"
-    mongo_crawling.insert_item_one(mongo, {"no": no, "title": title, "imgURL" : poster_real, "genre" : genreList, "date" : convert_date, "point" : point, "director": directorList, "cast": castList}, "movieDB", "movies")
+    mongo_crawling.insert_item_one(mongo, {"no": no, "title": title, "imgURL" : poster_real, "genre" : genreList, "date" : dateList2, "point" : point, "director": directorList, "cast": castList}, "movieDB", "movies")
 
 print("crawling is successfully done.")
