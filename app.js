@@ -7,6 +7,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const KakaoStrategy = require('passport-kakao').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const { PythonShell } = require('python-shell');
 const schedule = require('node-schedule');
@@ -101,7 +102,7 @@ passport.use(
             userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
         },
         function (accessToken, refreshToken, profile, done) {
-            User.findOrCreate({ userID: profile.id }, function (err, user) {
+            User.findOrCreate({ userID: 'google' + profile.id }, function (err, user) {
                 return done(err, user);
             });
         },
@@ -116,7 +117,22 @@ passport.use(
             callbackURL: 'https://rojinjin-moive.herokuapp.com/login/facebook/callback',
         },
         function (accessToken, refreshToken, profile, done) {
-            User.findOrCreate({ userID: profile.id }, function (err, user) {
+            User.findOrCreate({ userID: 'facebook' + profile.id }, function (err, user) {
+                return done(err, user);
+            });
+        },
+    ),
+);
+
+passport.use(
+    new KakaoStrategy(
+        {
+            clientID: process.env.KAKAO_CLIENT_ID,
+            clientSecret: process.env.KAKAO_CLIENT_SECRET,
+            callbackURL: 'https://rojinjin-moive.herokuapp.com/login/kakao/callback',
+        },
+        function (accessToken, refreshToken, profile, done) {
+            User.findOrCreate({ userID: 'kakao' + profile.id }, function (err, user) {
                 return done(err, user);
             });
         },
@@ -422,6 +438,17 @@ app.get('/login/facebook', passport.authenticate('facebook', { scope: ['public_p
 app.get(
     '/login/facebook/callback',
     passport.authenticate('facebook', {
+        failureRedirect: '/login',
+        successRedirect: '/',
+    }),
+);
+
+// Kakao Login
+app.get('/login/kakao', passport.authenticate('kakao', { scope: ['profile'] }));
+
+app.get(
+    '/login/kakao/callback',
+    passport.authenticate('kakao', {
         failureRedirect: '/login',
         successRedirect: '/',
     }),
