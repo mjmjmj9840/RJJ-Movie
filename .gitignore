@@ -275,6 +275,3 @@ $RECYCLE.BIN/
 ### VSCODE ###
 .vscode
 /vscode
-
-# for README.md #
-/screenshot
